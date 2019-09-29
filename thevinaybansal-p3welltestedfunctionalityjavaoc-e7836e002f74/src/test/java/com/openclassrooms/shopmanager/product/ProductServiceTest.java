@@ -8,6 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -67,5 +68,21 @@ public class ProductServiceTest {
         assertEquals(2, products.size());
         assertEquals(1L, products.get(0).getId() , 0);
         assertEquals(2L, products.get(1).getId() , 0);
-    }   
+    } 
+    
+    @Test
+    public void getAllProductById_productReturnedById() { 
+    	
+    	ProductEntity product1 = new ProductEntity();
+    	product1.setId(1L);
+    	product1.setPrice(25.0);
+    	
+    	when(productRepository.findById(1L)).thenReturn(Optional.of(product1));
+    	
+    	ProductEntity singleProductReturned = productService.getByProductId(1L);
+    	
+    	assertEquals(1L, singleProductReturned.getId() , 0);
+    	assertEquals(25.0, singleProductReturned.getPrice() , 0);
+    	
+    }
 }
