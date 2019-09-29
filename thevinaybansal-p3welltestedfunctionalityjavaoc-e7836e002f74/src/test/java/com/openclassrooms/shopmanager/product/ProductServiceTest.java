@@ -48,4 +48,24 @@ public class ProductServiceTest {
         assertEquals(1L, products.get(0).getId() , 0);
         assertEquals(2L, products.get(1).getId() , 0);
     }
+    
+    @Test
+    public void getAllAdminProducts_DbHasData_allDataReturned() {
+
+        ProductEntity product1 = new ProductEntity();
+        product1.setId(1L);
+        product1.setName("First product");
+
+        ProductEntity product2 = new ProductEntity();
+        product2.setId(2L);
+        product2.setName("Second product");
+
+        when(productRepository.findAllByOrderByIdDesc()).thenReturn(Arrays.asList(product1, product2));
+
+        List<ProductEntity> products = productService.getAllAdminProducts();
+
+        assertEquals(2, products.size());
+        assertEquals(1L, products.get(0).getId() , 0);
+        assertEquals(2L, products.get(1).getId() , 0);
+    }   
 }
