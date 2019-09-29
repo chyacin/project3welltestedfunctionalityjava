@@ -55,6 +55,12 @@ public class ProductService {
         // TODO What happens if a product has been added to a cart and then later gets removed from the inventory ?
         // delete the product form the cart by using the specific method
         // => the choice is up to the student
+    	
+    	for (CartLine cartLine :cartService.getCartLineList()) { 
+    		if(cartLine.getProduct().getId().equals(productId)) {
+    		   cartService.removeLine(productId);          
+           } 
+   	   } 
         productRepository.deleteById(productId);
     }
 
