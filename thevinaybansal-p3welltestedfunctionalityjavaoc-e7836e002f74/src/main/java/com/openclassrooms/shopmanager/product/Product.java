@@ -1,6 +1,9 @@
 package com.openclassrooms.shopmanager.product;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class Product {
 
@@ -10,6 +13,8 @@ public class Product {
     private String name;        // Required
     private String description;
     private String details;
+    
+    @DecimalMin(value = ".01") @Positive @NotNull 
     private Integer quantity;   // Required, Integer, Greater than zero
     private Double price;       // Required, Numeric, Greater than zero
 
