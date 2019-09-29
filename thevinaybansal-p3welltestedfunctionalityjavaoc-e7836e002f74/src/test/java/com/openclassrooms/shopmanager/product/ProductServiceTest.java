@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 /**
@@ -120,5 +121,14 @@ public class ProductServiceTest {
         
   }
     
-    
+    @Test
+    public void deletingExsitingProduct_successfullyDeletingProductById() {
+    	
+    	Long productId = 1L;
+    	
+		productRepository.deleteById(productId);
+
+		Mockito.verify(productRepository, times(1)).deleteById(productId);	
+		
+    }
 }
