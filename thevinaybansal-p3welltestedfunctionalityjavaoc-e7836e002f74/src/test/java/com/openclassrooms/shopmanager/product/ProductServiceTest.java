@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -85,4 +86,39 @@ public class ProductServiceTest {
     	assertEquals(25.0, singleProductReturned.getPrice() , 0);
     	
     }
+    
+    @Test
+    public void createProduct_returncreatedProduct() {
+    	
+    	ProductEntity productEntity = new ProductEntity();
+    	productEntity.setId(1L);
+    	productEntity.setPrice(32.50);
+    	productEntity.setDescription("Long and Black");
+    	productEntity.setDetails("54 inches long");
+    	productEntity.setName("A20 Samsung");
+    	productEntity.setQuantity(40);
+    	when(productRepository.save(Mockito.any(ProductEntity.class))).thenReturn(productEntity);
+    	
+    	
+    	Product product = new Product();
+    	product.setId(productEntity.getId());
+        product.setDescription(productEntity.getDescription());
+        product.setDetails(productEntity.getDetails());
+        product.setName(productEntity.getName());
+        product.setPrice(productEntity.getPrice());
+        product.setQuantity(productEntity.getQuantity());
+        productService.createProduct(product);
+         
+        ProductEntity createdProduct = productService.createProduct(product);
+        
+    	assertEquals(1L, createdProduct.getId(), 0);
+        assertEquals(32.50, createdProduct.getPrice(), 0);
+        assertEquals("Long and Black", createdProduct.getDescription());
+        assertEquals("54 inches long", createdProduct.getDetails());
+        assertEquals("A20 Samsung", createdProduct.getName());
+        assertEquals(40, createdProduct.getQuantity(), 0);
+        
+  }
+    
+    
 }
