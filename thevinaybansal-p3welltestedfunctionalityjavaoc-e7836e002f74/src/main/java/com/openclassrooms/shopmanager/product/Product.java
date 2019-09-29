@@ -1,8 +1,12 @@
 package com.openclassrooms.shopmanager.product;
 
+import javax.validation.constraints.NotBlank;
+
 public class Product {
 
     private Long id;
+    
+    @NotBlank
     private String name;        // Required
     private String description;
     private String details;
