@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.openclassrooms.shopmanager.cart.CartService;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -129,6 +131,24 @@ public class ProductServiceTest {
 		productRepository.deleteById(productId);
 
 		Mockito.verify(productRepository, times(1)).deleteById(productId);	
+		
+    }
+    
+    @Test
+    public void updateProductQuantities_successfullyUpdateProductQuantities() {
+	  
+    	ProductEntity product = new ProductEntity();
+		product.setId(1L);
+		product.setQuantity(25);
+
+		CartService cartService = new CartService();
+		cartService.addItem(product, 1);
+		
+		when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+
+		productService.updateProductQuantities(cartService);
+
+		Mockito.verify(productService, times(1)).updateProductQuantities(cartService);
 		
     }
 }
