@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import org.hibernate.validator.constraints.Range;
+
 public class Product {
 
     private Long id;
@@ -16,6 +18,8 @@ public class Product {
     
     @DecimalMin(value = ".01") @Positive @NotNull 
     private Integer quantity;   // Required, Integer, Greater than zero
+    
+    @Positive  @Range(min = 1, max = Integer.MAX_VALUE) @NotNull
     private Double price;       // Required, Numeric, Greater than zero
 
     public Long getId() {
