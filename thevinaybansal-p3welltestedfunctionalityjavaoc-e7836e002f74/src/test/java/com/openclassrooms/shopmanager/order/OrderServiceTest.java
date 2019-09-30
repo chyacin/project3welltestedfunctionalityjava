@@ -55,4 +55,18 @@ public class OrderServiceTest {
      
     }   
 
+    @Test   
+    public void saveOrder_returnSavedOrder() {
+   	 
+   	 Order order = new Order();
+   	 
+   	 ArgumentCaptor<Order> argument = ArgumentCaptor.forClass(Order.class);
+   	 
+   	 orderService.saveOrder(order);
+   	 
+   	 Mockito.verify(orderRepository).save(argument.capture());
+   	 
+   	 assertEquals(order, argument.getValue());
+   	 
+    }  
 }
