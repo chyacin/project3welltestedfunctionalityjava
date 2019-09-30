@@ -69,4 +69,21 @@ public class OrderServiceTest {
    	 assertEquals(order, argument.getValue());
    	 
     }  
+    
+    @Test
+    public void removeFromCart_returnEmptyCart() { 
+   	 
+   	 ProductEntity product1 = new ProductEntity();
+   	 product1.setId(1L);
+   	 
+   	 when(productService.getByProductId(1L)).thenReturn(product1);
+   	 
+   	 orderService.addToCart(1L);
+        orderService.removeFromCart(1L);
+        
+        boolean cartEmpty = orderService.isCartEmpty();
+
+        assertEquals(true, cartEmpty);
+   	  
+    }
 }
