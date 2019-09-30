@@ -86,4 +86,17 @@ public class OrderServiceTest {
         assertEquals(true, cartEmpty);
    	  
     }
+    
+    @Test
+    public void isCartEmpty_returnTrue() {
+   	 
+   	CartService cartList = new CartService();
+   			
+ 		boolean removedFromCart = cartList.getCartLineList().isEmpty();
+ 		
+ 		assertEquals(true, removedFromCart); 
+    
+    }
+    
+    
 }
