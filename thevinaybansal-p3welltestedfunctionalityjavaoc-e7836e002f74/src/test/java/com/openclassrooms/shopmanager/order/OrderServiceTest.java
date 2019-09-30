@@ -98,5 +98,21 @@ public class OrderServiceTest {
     
     }
     
-    
+    @Test
+    public void createOrder_returnCreatedOrder() {
+    	
+    	Order order = new Order();
+    	ArgumentCaptor<Order> argument = ArgumentCaptor.forClass(Order.class);
+    	ArgumentCaptor<CartService>  argument2 = ArgumentCaptor.forClass(CartService.class);
+    	
+    	orderService.createOrder(order);
+    	
+    	Mockito.verify(orderRepository).save(argument.capture());
+    	Mockito.verify(productService).updateProductQuantities(argument2.capture());
+    	
+    	assertEquals(order, argument.getValue());
+    	assertNotNull(argument2.getValue());
+    	
+    	
+    }
 }
