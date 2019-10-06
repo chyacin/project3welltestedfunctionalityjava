@@ -61,4 +61,16 @@ private MockMvc mockMvc;
 		.andExpect(model().errorCount(2));
 	}
 	
+	@Test
+	public void testCreateProductWithPriceNotANumber() throws Exception{
+		
+		mockMvc.perform(post("/admin/product")
+		 .param("name", "A20 Samsung 2019")
+		 .param("price", "Hello")
+		 .param("quantity", "5"))
+		 .andExpect(view().name("product"))
+		 .andExpect(model().attributeHasFieldErrors("product", "price"))
+		 .andExpect(status().isOk())
+		 .andExpect(model().errorCount(1));
+	}
 }
