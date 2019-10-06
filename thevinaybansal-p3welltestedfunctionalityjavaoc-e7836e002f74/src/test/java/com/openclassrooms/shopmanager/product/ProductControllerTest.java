@@ -48,5 +48,17 @@ private MockMvc mockMvc;
 			       					
 	}
 	
+	@Test
+	public void testCreateProductWithPriceNotGreaterThanZero() throws Exception {
+		
+		mockMvc.perform(post("/admin/product")
+		.param("name", "A20 Samsung 2019")
+		.param("price", "0")
+		.param("quantity", "5"))
+		.andExpect(view().name("product"))
+		.andExpect(model().attributeHasFieldErrors("product", "price"))
+		.andExpect(status().isOk())
+		.andExpect(model().errorCount(2));
+	}
 	
 }
